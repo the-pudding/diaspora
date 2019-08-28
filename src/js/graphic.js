@@ -93,72 +93,72 @@ function drawMap(us){
 
     const path = d3.geoPath(projection);
 
-    // let corners = {
-    //     tl: [-129.2564141943848, 48.153946283439424],
-    //     bl: [-129.2564141943848, 22.966363869103986],
-    //     tr: [-74.2681980247622, 48.153946283439424],
-    //     br: [-74.2681980247622, 22.966363869103986]
-    //   }
+    let corners = {
+        tl: [-129.2564141943848, 48.153946283439424],
+        bl: [-129.2564141943848, 22.966363869103986],
+        tr: [-74.2681980247622, 48.153946283439424],
+        br: [-74.2681980247622, 22.966363869103986]
+      }
       
-    //   function coordsToGeoJson(coords) {
-    //     coords.push(coords[0]); // last coord needs to be the same as the first to be valid
-    //     return {
-    //       "type": "Feature",
-    //       "geometry": {
-    //         "type": "Polygon",
-    //         "coordinates": [ coords ]
-    //       },
-    //       "properties": { "id": "bbox" },
-    //     }
-    //   }
+      function coordsToGeoJson(coords) {
+        coords.push(coords[0]); // last coord needs to be the same as the first to be valid
+        return {
+          "type": "Feature",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [ coords ]
+          },
+          "properties": { "id": "bbox" },
+        }
+      }
       
-    // let basemapBounds = coordsToGeoJson([corners.tl, corners.tr, corners.br, corners.bl]);
+    let basemapBounds = coordsToGeoJson([corners.tl, corners.tr, corners.br, corners.bl]);
 
 
-    // let width, height;
-    // width = $svgContainer.node().getBoundingClientRect().width;
-    // height = $svgContainer.node().getBoundingClientRect().height;
+    let width, height;
+    width = $svgContainer.node().getBoundingClientRect().width;
+    height = $svgContainer.node().getBoundingClientRect().height;
     
    
-    // const imageWidth = 4467
-    // const imageHeight = 3087
+    const imageWidth = 4467
+    const imageHeight = 3087
     
-    // let trueHeight, trueWidth;
+    let trueHeight, trueWidth;
 
-    // if (height / width > imageHeight / imageWidth) {
-    //     trueHeight = height;
-    //     trueWidth = height * (imageWidth / imageHeight);
-    //   } else {
-    //     trueWidth = width;
-    //     trueHeight = width / (imageWidth / imageHeight);
-    //   }
+    if (height / width > imageHeight / imageWidth) {
+        trueHeight = height;
+        trueWidth = height * (imageWidth / imageHeight);
+      } else {
+        trueWidth = width;
+        trueHeight = width / (imageWidth / imageHeight);
+      }
     
-    // var padding = 1;
+    var padding = 1;
     
-    // let centroid = [-96, 37.5],//d3.geoCentroid(basemapBounds),
-    // rotation_target = -centroid[0];
+    let centroid = [-96, 37.5],//d3.geoCentroid(basemapBounds),
+    rotation_target = -centroid[0];
     
-    // projection
-    //     .scale(1)
-    //     .center([0, centroid[1]])
-    //     .translate([0,0])
-    //     .rotate([rotation_target,0]);
+    projection
+        .scale(1)
+        .center([0, centroid[1]])
+        .translate([0,0])
+        .rotate([rotation_target,0]);
     
-    // let currentBounds = path.bounds(basemapBounds);
-    // let currentWidth = currentBounds[1][0] - currentBounds[0][0];
-    // let currentHeight = currentBounds[1][1] - currentBounds[0][1];
+    let currentBounds = path.bounds(basemapBounds);
+    let currentWidth = currentBounds[1][0] - currentBounds[0][0];
+    let currentHeight = currentBounds[1][1] - currentBounds[0][1];
     
     
-    // let s = padding / (currentWidth / trueWidth),
-    //     t = [
-    //         ((trueWidth - s * (currentBounds[1][0] + currentBounds[0][0])) / 2) - ((trueWidth - width) / 2), 
-    //         ((trueHeight - s * 1.01 * (currentBounds[1][1] + currentBounds[0][1])) / 2) - ((trueHeight - height) / 2) - 9
-    //     ];
+    let s = padding / (currentWidth / trueWidth),
+        t = [
+            ((trueWidth - s * (currentBounds[1][0] + currentBounds[0][0])) / 2) - ((trueWidth - width) / 2), 
+            ((trueHeight - s * 1.01 * (currentBounds[1][1] + currentBounds[0][1])) / 2) - ((trueHeight - height) / 2) - 9
+        ];
   
-    // projection
-    //     .center([0, centroid[1]])
-    //     .scale(s)
-    //     .translate(1000);
+    projection
+        .center([0, centroid[1]])
+        .scale(s)
+        .translate(1000);
 
 
     $svg.append('g')
