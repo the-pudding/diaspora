@@ -1,0 +1,33 @@
+
+<div class='intro'>
+    <div class='intro__cover-left'>
+        
+        <h1 class='hed'>{{meta.title}}</h1>
+       
+        <p class='country-hed-container'> <span class='country-hed'>{{meta.countryTitle}}</span></p>
+       
+        <p class='byline medium'>By
+            <a href='{{meta.author1.url}}' target='_blank'>
+                <strong>{{meta.author1.name}}</strong>
+            </a> &#38;
+            <a href='{{meta.author2.url}}' target='_blank'>
+                <strong>{{meta.author2.name}}</strong>
+            </a>
+        </p>
+
+        {{!-- <p class='dek'>{{meta.description}}</p> --}}
+
+        <time class='time small'>August 2019</time>
+
+        {{#each doc.blurb}}
+            <p class='blurb medium'>{{{value}}}</p>
+        {{/each}}
+
+        <div class=''></div>
+    </div>
+
+
+    <div class='intro__right'>
+        
+    </div>
+</div>

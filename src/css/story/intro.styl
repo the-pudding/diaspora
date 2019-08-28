@@ -1,0 +1,84 @@
+.intro
+    display flex
+    flex-direction row
+    height 100vh
+    width 100%
+
+    &__cover-left
+        margin 0 auto
+        padding 6rem 1rem 3rem 1rem
+        background-color $thisBlue
+        width 50% 
+        display flex
+        justify-content space-evenly
+        flex-direction column
+        
+    
+        .hed
+            max-width 60rem
+            margin 0 auto
+            text-align center
+            font-family $national
+            color white    
+                    
+        .country-hed-container
+            text-align center
+            margin 0
+
+
+        .country-hed
+            max-width 60rem
+            margin 0 auto
+            text-align left
+            font-family $national
+            color $thisSalmon
+            font-size: 72px
+            font-weight: 800
+            border-bottom: 3px dashed $thisSalmon
+        
+        .dek
+            max-width $column-width
+            margin 0 auto
+            text-align left
+            
+        .byline
+            max-width $column-width
+            margin 0 auto
+            text-align center
+            font-family: $national
+            color white
+            a
+                color white
+                border-bottom: 1px solid white
+                
+            
+        .time
+            display block
+            max-width $column-width
+            font-family $national
+            margin 0 auto
+            margin-top 1rem
+            text-align center
+            color gray
+        
+        .blurb
+            color white
+            font-family $tiempos
+            max-width 60rem
+            margin 0 auto
+            text-align: left
+
+            .subhed-country
+                color $thisSalmon
+                border-bottom: 1px dashed $thisSalmon
+                font-weight: 600
+    
+    &__right
+        width 50%
+        height 100%
+        background linear-gradient(
+            rgba(145,144,186,0.8),
+            rgba(145,144,186,0.8)
+        ),url(../assets/images/canada.png);
+        
+        

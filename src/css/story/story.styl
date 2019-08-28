@@ -1,0 +1,57 @@
+/* CUSTOM STORY STYLE */
+main
+    background-color: $thisBlue
+
+.short-story
+    background-color $thisBlue
+
+    &__intro
+        margin 0 auto
+        max-width: 50rem
+        font-size: 24px
+        height 60vh
+        padding-top: 30vh
+
+        .story-text
+            color white
+    
+    &__header
+        .em-dash-border
+            margin-top 0
+            color $thisSalmon
+            font-size: 72px
+            font-weight: 800
+            font-family: $national
+            line-height: 0
+        
+    &__title
+        font-size: 72px
+        color $thisSalmon        
+        font-weight: 600
+        font-family: $national
+
+.explore
+    display flex
+    flex-direction row
+
+    &__nav-bar         
+        flex-grow 1
+        color white
+        height 100vh
+        
+        ul
+            overflow hidden
+        
+            li
+                overflow scroll
+    
+    &__map-container 
+        flex-grow: 4
+        background-image url('assets/images/mainland_sun.png')
+        background-repeat no-repeat
+        background-size: contain;
+
+.state
+    fill-opacity 0
+    stroke #000
+
