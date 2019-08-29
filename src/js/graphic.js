@@ -136,13 +136,13 @@ function drawMap(us){
     var padding = 1;
     
     let centroid = [-96, 37.5],//d3.geoCentroid(basemapBounds),
-    rotation_target = -centroid[0];
+    rotationTarget = -centroid[0];
     
     projection
         .scale(1)
         .center([0, centroid[1]])
         .translate([0,0])
-        .rotate([rotation_target,0]);
+        .rotate([rotationTarget,0]);
     
     let currentBounds = path.bounds(basemapBounds);
     let currentWidth = currentBounds[1][0] - currentBounds[0][0];
@@ -154,11 +154,13 @@ function drawMap(us){
             ((trueWidth - s * (currentBounds[1][0] + currentBounds[0][0])) / 2) - ((trueWidth - width) / 2), 
             ((trueHeight - s * 1.01 * (currentBounds[1][1] + currentBounds[0][1])) / 2) - ((trueHeight - height) / 2) - 9
         ];
+
+    console.log(s, t)
   
     projection
         .center([0, centroid[1]])
         .scale(s)
-        .translate(1000);
+        .translate(t);
 
 
     $svg.append('g')
