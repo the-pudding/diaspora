@@ -89,14 +89,14 @@ function drawMap(us){
         .translate([0, 0]) 
         .scale([100])
         .rotate([0, 0])
-        .parallels([29.5, 45.5]); 
+        .parallels([20, 60]); 
 
     const path = d3.geoPath(projection);
 
     let corners = {
         tl: [-129.2564141943848, 48.153946283439424],
-        bl: [-129.2564141943848, 22.966363869103986],
-        tr: [-74.2681980247622, 48.153946283439424],
+        bl: [-118.77416667, 22.74138889],
+        tr: [-64.20361111, 48.46388889],
         br: [-74.2681980247622, 22.966363869103986]
       }
       
@@ -114,28 +114,29 @@ function drawMap(us){
       
     let basemapBounds = coordsToGeoJson([corners.tl, corners.tr, corners.br, corners.bl]);
 
+    console.log(basemapBounds)
 
-    let width, height;
-    width = $svgContainer.node().getBoundingClientRect().width;
-    height = $svgContainer.node().getBoundingClientRect().height;
+    let divWidth = $svgContainer.node().getBoundingClientRect().width;
+    let divHeight = $svgContainer.node().getBoundingClientRect().height;
     
    
     const imageWidth = 4467
     const imageHeight = 3087
-    
-    let trueHeight, trueWidth;
 
-    if (height / width > imageHeight / imageWidth) {
-        trueHeight = height;
-        trueWidth = height * (imageWidth / imageHeight);
-      } else {
-        trueWidth = width;
-        trueHeight = width / (imageWidth / imageHeight);
-      }
+    let trueImageHeight, trueImageWidth;
+
+    if (divHeight / divWidth > imageHeight / imageWidth) {
+        trueImageWidth = divWidth;
+        trueImageHeight = divHeight * (imageHeight / imageWidth);
+    } else {
+        trueImageHeight = divHeight;
+        trueImageWidth = divHeight * (imageWidth / imageHeight)
+    }
+    
     
     var padding = 1;
     
-    let centroid = [-96, 37.5],//d3.geoCentroid(basemapBounds),
+    let centroid = [-96, 40],//d3.geoCentroid(basemapBounds),
     rotationTarget = -centroid[0];
     
     projection
@@ -143,25 +144,37 @@ function drawMap(us){
         .center([0, centroid[1]])
         .translate([0,0])
         .rotate([rotationTarget,0]);
-    
+
     let currentBounds = path.bounds(basemapBounds);
-    let currentWidth = currentBounds[1][0] - currentBounds[0][0];
-    let currentHeight = currentBounds[1][1] - currentBounds[0][1];
-    
-    
-    let s = padding / (currentWidth / trueWidth),
+
+    console.log(currentBounds)
+
+    let xMin = currentBounds[0][0]
+    let xMax = currentBounds[1][0]
+    let yMin = currentBounds[0][1]
+    let yMax = currentBounds[1][1]
+
+    let currentPathWidth = xMax - xMin;
+    let currentPathHeight = yMax - yMin;
+
+    console.log(currentPathWidth / trueImageWidth);
+    console.log(currentPathHeight / trueImageHeight)
+
+    let s = 1 / (currentPathWidth / trueImageWidth),
         t = [
-            ((trueWidth - s * (currentBounds[1][0] + currentBounds[0][0])) / 2) - ((trueWidth - width) / 2), 
-            ((trueHeight - s * 1.01 * (currentBounds[1][1] + currentBounds[0][1])) / 2) - ((trueHeight - height) / 2) - 9
+            ((s * (xMax - xMin)) / 2), 
+            ((s * (yMax - yMin)) / 2)
         ];
 
-    console.log(s, t)
-  
+
     projection
         .center([0, centroid[1]])
         .scale(s)
         .translate(t);
 
+    console.log(trueImageWidth, trueImageHeight)
+
+    console.log(path.centroid(basemapBounds))
 
     $svg.append('g')
         .attr('class', 'states')
